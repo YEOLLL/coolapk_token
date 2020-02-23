@@ -28,7 +28,7 @@ pub fn get_as(device_id:&str) -> String {
     let token = salt_md5 + device_id + "0x" + format!("{:x}", timestamp).as_str();
     token
 }
-pub fn test_token(token: String) -> bool{
+pub fn test_token(token: String) {
     let client = reqwest::Client::new();
     let mut res = client
         .get("https://api.coolapk.com/v6/main/init")
@@ -38,11 +38,11 @@ pub fn test_token(token: String) -> bool{
         .header("X-Sdk-Locale", "zh-CN")
         .header("X-App-Id", "com.coolapk.market")
         .header("X-App-Version", "10.0.1")
-        .header("X-App-Code", "2001201").header("X-App-Token", token.as_str())
+        .header("X-App-Code", "2001201")
+        .header("X-App-Token", token.as_str())
         .send()
         .unwrap();
     println!("{}", res.text().unwrap());
-    false
 }
 
 #[cfg(test)]
