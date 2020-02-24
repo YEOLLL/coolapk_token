@@ -1,7 +1,6 @@
 use chrono::Local;
 use base64::encode;
 use reqwest;
-use reqwest::header::*;
 use rust_md5::md5::hash;
 
 fn string_to_hash(input: &str) -> String {
@@ -35,7 +34,7 @@ pub fn test_token(token: String) {
     let client = reqwest::Client::new();
     let mut res = client
         .get("https://api.coolapk.com/v6/main/init")
-        .header(USER_AGENT, "Dalvik/2.1.0 (Linux; U; Android 7.1.2; VirtualBox Build/N2G48H) (#Build; Android-x86; VirtualBox; android_x86-userdebug 7.1.2 N2G48H eng.cwhuan.20180502.160334 test-keys; 7.1.2) +CoolMarket/9.0.2")
+        .header("User_Agent", "Dalvik/2.1.0 (Linux; U; Android 7.1.2; VirtualBox Build/N2G48H) (#Build; Android-x86; VirtualBox; android_x86-userdebug 7.1.2 N2G48H eng.cwhuan.20180502.160334 test-keys; 7.1.2) +CoolMarket/9.0.2")
         .header("X-Requested-With", "XMLHttpRequest")
         .header("X-Sdk-Int", "26")
         .header("X-Sdk-Locale", "zh-CN")
