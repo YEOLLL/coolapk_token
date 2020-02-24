@@ -1,17 +1,20 @@
-mod util;
-
 use chrono::Local;
 use base64::encode;
 use reqwest;
 use reqwest::header::*;
 use rust_md5::md5::hash;
-use util::*;
 
 fn string_to_hash(input: &str) -> String {
     let vec = input.as_bytes().to_vec();
     let output = &mut Vec::new();
     hash(vec, output);
     hex_to_string(output)
+}
+fn hex_to_string(bytes: &Vec<u8>) -> String {
+    return bytes.iter()
+        .map(|b| format!("{:02x}", b))
+        .collect::<Vec<_>>()
+        .join("");
 }
 
 pub fn get_as(device_id:&str) -> String {
